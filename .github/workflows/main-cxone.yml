@@ -7,10 +7,12 @@ on:
     branches:
       - main
       - master
+      - cxone-scanning
   pull_request:
     branches:
       - main
       - master
+      - cxone-scanning
 
 jobs:
   build:
