@@ -43,4 +43,4 @@ jobs:
           cx_client_id: ${{ secrets.CX_CLIENT_ID }}
           cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
           #project_name: JavaVulnerable-LabApp
-          scan_params: --project-tags java-project,TestEm --scan-types sast,iac-security,sca,container-security --sast-incremental=false
+          scan_params: --project-tags java-project,TestEm --scan-types sast,iac-security,sca,container-security --sast-incremental=true
