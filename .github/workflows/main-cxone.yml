@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Simple Build Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print build word
+        run: echo "build1"
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+  scan:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Checkmarx AST Github Action Scan
+        uses: Checkmarx/ast-github-action@2.3.36
+        with:
+          base_uri: ${{ secrets.CX_BASE_URI }}
+          cx_tenant: ${{ secrets.CX_TENANT }}
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          #project_name: JavaVulnerable-LabApp
+          scan_params: --project-tags java-project,TestEm --scan-types sast,iac-security,sca
